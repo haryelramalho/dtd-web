@@ -43,18 +43,13 @@
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
+    "camelcase": "warn",
     "import/extensions": [
       "error",
       "ignorePackages",
       {
         "ts": "never",
         "tsx": "never"
-      }
-    ],
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
       }
     ],
     "max-len": [
