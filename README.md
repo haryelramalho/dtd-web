@@ -1,3 +1,30 @@
+# Setup
+
+## Desenvolvendo
+
+Você irá precisar do `Node 10.x ou acima` instalado na sua maquina além do `Yarn 1.x`
+
+### Scripts
+
+```sh
+$ yarn install # Instalar as dependências do projeto
+$ yarn test # Rodar todos os testes do projeto
+$ yarn start # Rodar modo de desenvolvimento do projeto
+$ yarn build # Buildar projeto
+```
+
+### Técnologias
+
+#### Base
+
+O projeto foi criado com base no template `Create React App (CRA) com Typescript`.
+
+#### Estilo
+
+O `CRA` por padrão já possui o `CSS modules` configurado. Além disso está sendo utilizado a biblioteca de componentes do [`Antd`](https://ant.design/), e por conta dele utilizar o `less` para estilização é possível encontrar alguns arquivos no projeto para alterar o estilo padrão, além disso foi utilizado o `craco` (indicação do Antd) para sobrescrever algumas propriedades do `CRA`.
+
+----------------------
+
 # Desafio Toro Desenvolvedor Full-Stack e Backend
 
 Bem-vindo ao desafio de programação da Toro Investimentos.
