@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { renderWithRouter } from '../../test-utils/renderWithRouter';
 
 import Home from './index';
 
 describe('Home', () => {
   it('should renders', () => {
-    const { container } = render(<Home />);
+    const { container } = renderWithRouter(<Home />);
 
     expect(container).toBeInTheDocument();
   });
