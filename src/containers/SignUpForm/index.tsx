@@ -2,29 +2,53 @@ import {
   Form, Input, Button, Spin,
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 
 import styles from './index.module.css';
 import { useAuth } from '../../contexts/Auth';
 
 type FormValues = {
+  name: string
   email: string
   password: string
 }
 
-function SignInForm(): JSX.Element {
+const confirmPasswordValidation = ({
+  getFieldValue,
+}: {
+  getFieldValue: (name: string) => string
+}) => ({
+  validator(_: any, confimaPassword: string) {
+    return new Promise<void>((resolve, reject) => {
+      if (!confimaPassword || getFieldValue('password') === confimaPassword) {
+        return resolve();
+      }
+      return reject(new Error('As suas senhas não estão iguais'));
+    });
+  },
+});
+
+function SignUpForm(): JSX.Element {
   const auth = useAuth();
 
   const onFinish = async (values: FormValues): Promise<void> => {
-    await auth.signIn(values);
+    await auth.signUp(values);
   };
 
   return (
     <Form
-      name="signin"
-      className={styles.signin_form}
+      name="signup"
+      className={styles.signup_form}
       onFinish={onFinish}
     >
+      <Form.Item
+        name="name"
+        rules={[
+          { required: true, message: 'Por favor digite o seu Nome Completo' },
+        ]}
+        hasFeedback
+      >
+        <Input placeholder="Nome" />
+      </Form.Item>
       <Form.Item
         name="email"
         rules={[
@@ -51,14 +75,27 @@ function SignInForm(): JSX.Element {
           placeholder="Senha"
         />
       </Form.Item>
-      <Form.Item>
-        <Link to="/signup">
-          Criar nova conta
-        </Link>
+      <Form.Item
+        name="confirm"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Por favor confirma a sua senha',
+          },
+          confirmPasswordValidation,
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined />}
+          type="password"
+          placeholder="Confirmar senha"
+        />
       </Form.Item>
       <Form.Item>
         <Button
-          className={styles.signin_form_button}
+          className={styles.signup_form_button}
           type="primary"
           htmlType="submit"
           disabled={auth.loading}
@@ -66,7 +103,7 @@ function SignInForm(): JSX.Element {
           {
             auth.loading
               ? <Spin />
-              : 'Acessar minha conta'
+              : 'Criar conta'
           }
         </Button>
       </Form.Item>
@@ -74,4 +111,4 @@ function SignInForm(): JSX.Element {
   );
 }
 
-export default SignInForm;
+export default SignUpForm;
