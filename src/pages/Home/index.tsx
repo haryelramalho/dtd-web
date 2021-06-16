@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Form, Input, Button, Spin,
 } from 'antd';
@@ -16,6 +17,10 @@ type FormValues = {
 
 function Home(): JSX.Element {
   const auth = useAuth();
+
+  useEffect(() => {
+    auth.checkIsAuthenticated();
+  }, []);
 
   const onFinish = async (values: FormValues): Promise<void> => {
     await auth.signIn(values);
