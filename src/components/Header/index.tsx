@@ -31,7 +31,12 @@ function Header(
 
       {
         isAuthenticated && (
-          <Button onClick={onLogout} shape="round" icon={<LogoutOutlined />}>
+          <Button
+            data-testid="header-signout-button"
+            onClick={onLogout}
+            shape="round"
+            icon={<LogoutOutlined />}
+          >
             Sair
           </Button>
         )
