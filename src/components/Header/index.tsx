@@ -7,7 +7,7 @@ import logoToro from '../../assets/images/logo-toro.png';
 import styles from './index.module.css';
 
 type HeaderProps = {
-  isAuthenticated: boolean
+  isAuthenticated?: boolean
   onLogout?: () => void | Promise<void>
 }
 
