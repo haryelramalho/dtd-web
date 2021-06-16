@@ -4,7 +4,7 @@ import {
 
 import { useAuth } from '../../contexts/Auth';
 
-import Dashboard from './Dashboard';
+import Main from './Main';
 
 function Routes(): JSX.Element {
   const auth = useAuth();
@@ -14,7 +14,7 @@ function Routes(): JSX.Element {
     ? (
       <>
         <Route path="/">
-          <Dashboard />
+          <Main />
         </Route>
       </>
     )

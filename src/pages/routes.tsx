@@ -4,7 +4,7 @@ import { AuthProvider } from '../contexts/Auth';
 
 import Home from './Home';
 import SignUp from './SignUp';
-import Panel from './Panel/routes';
+import Dashboard from './Dashboard/routes';
 
 function Routes(): JSX.Element {
   return (
@@ -13,7 +13,7 @@ function Routes(): JSX.Element {
         <Switch>
           <Route path="/dashboard">
             <Switch>
-              <Panel />
+              <Dashboard />
             </Switch>
           </Route>
           <Route path="/signup">
