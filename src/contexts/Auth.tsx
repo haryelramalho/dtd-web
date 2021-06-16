@@ -9,7 +9,7 @@ import {
 } from '../services/api/users';
 import * as storage from '../services/localStorage';
 
-interface IAuthContext {
+export interface IAuthContext {
   authToken?: string;
   userName?: string;
   loading: boolean;
@@ -21,7 +21,7 @@ interface IAuthContext {
 
 const noop = () => ({}) as any;
 
-const AuthContext = createContext<IAuthContext>(
+export const AuthContext = createContext<IAuthContext>(
   {
     signUp: noop,
     signIn: noop,
