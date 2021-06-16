@@ -22,12 +22,6 @@ export type SignInResponse = {
   session_token: string
 }
 
-export const signUp = (
-  {
-    name,
-    email,
-    password,
-  }: SignUpBody,
-): Promise<void> => apiService.post('/users/signup', { name, email, password });
+export const signUp = (values: SignUpBody): Promise<void> => apiService.post('/users/signup', values);
 
-export const signIn = ({ email, password }: SignInBody) => apiService.post<SignInResponse>('/users/signin', { email, password });
+export const signIn = (values: SignInBody) => apiService.post<SignInResponse>('/users/signin', values);
