@@ -14,3 +14,16 @@ window.matchMedia = (query) => ({
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
 });
+
+// Supress Antd's async-validator warnings to be logged on test enviroment
+const filteredWarnMessages: string[] = [
+  'async-validator:',
+];
+const privateWarnLog = console.warn;
+jest
+  .spyOn(console, 'warn')
+  .mockImplementation((msg: string, ...args: unknown[]) => {
+    filteredWarnMessages.some((message) => msg.includes(message))
+      ? jest.fn()
+      : privateWarnLog(msg, ...args);
+  });
