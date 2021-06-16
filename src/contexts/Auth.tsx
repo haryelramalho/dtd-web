@@ -11,6 +11,7 @@ import * as storage from '../services/localStorage';
 
 interface IAuthContext {
   authToken?: string;
+  userName?: string;
   loading: boolean;
   signIn: (values: SignInBody) => Promise<void>
   signUp: (values: SignUpBody) => Promise<void>
@@ -30,13 +31,16 @@ export const AuthProvider = (
 ): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [authToken, setAuthToken] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
   const history = useHistory();
 
   useEffect(() => {
     const token = storage.getItem('authToken');
+    const name = storage.getItem('userName');
 
-    if (token) {
+    if (token && name) {
       setAuthToken(token);
+      setUserName(name);
       history.push('/dashboard');
     }
   }, []);
@@ -45,13 +49,17 @@ export const AuthProvider = (
     setLoading(true);
 
     try {
-      const credentials = await signIn(values);
+      const response = await signIn(values);
 
-      const token = credentials.data.session_token;
+      const credentials = response.data;
 
-      setAuthToken(token);
+      const { name, session_token } = credentials;
 
-      storage.setItem('authToken', token);
+      setAuthToken(session_token);
+      setUserName(name);
+
+      storage.setItem('authToken', session_token);
+      storage.setItem('userName', name);
 
       history.push('/dashboard');
     } catch (error) {
@@ -108,6 +116,7 @@ export const AuthProvider = (
       signUp: signUpImplementation,
       signOut: signOutImplementation,
       authToken,
+      userName,
     }}
     >
       {children}
