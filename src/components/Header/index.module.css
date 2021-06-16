@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo_container {
+  float: left;
+  width: 120px;
+}
+
+.logo_image {
+  width: 100%;
+}
