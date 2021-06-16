@@ -1,5 +1,5 @@
 import {
-  createContext, ReactNode, useContext, useEffect, useState,
+  createContext, ReactNode, useCallback, useContext, useEffect, useState,
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -16,13 +16,18 @@ interface IAuthContext {
   signIn: (values: SignInBody) => Promise<void>
   signUp: (values: SignUpBody) => Promise<void>
   signOut: () => void
+  checkIsAuthenticated: () => void
 }
 
 const noop = () => ({}) as any;
 
 const AuthContext = createContext<IAuthContext>(
   {
-    signUp: noop, signIn: noop, signOut: noop, loading: false,
+    signUp: noop,
+    signIn: noop,
+    signOut: noop,
+    checkIsAuthenticated: noop,
+    loading: false,
   },
 );
 
@@ -34,7 +39,7 @@ export const AuthProvider = (
   const [userName, setUserName] = useState<string>('');
   const history = useHistory();
 
-  useEffect(() => {
+  const checkIsAuthenticated = useCallback(() => {
     const token = storage.getItem('authToken');
     const name = storage.getItem('userName');
 
@@ -44,6 +49,10 @@ export const AuthProvider = (
       history.push('/dashboard');
     }
   }, []);
+
+  useEffect(() => {
+    checkIsAuthenticated();
+  }, [checkIsAuthenticated]);
 
   const signInImplementation = async (values: SignInBody) => {
     setLoading(true);
@@ -105,6 +114,8 @@ export const AuthProvider = (
   };
 
   const signOutImplementation = () => {
+    setAuthToken('');
+    setUserName('');
     storage.removeItem('authToken');
     history.push('/');
   };
@@ -115,6 +126,7 @@ export const AuthProvider = (
       signIn: signInImplementation,
       signUp: signUpImplementation,
       signOut: signOutImplementation,
+      checkIsAuthenticated,
       authToken,
       userName,
     }}
