@@ -3,7 +3,7 @@ import {
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import Layout from '../../layout';
+import { Layout } from '../../layout';
 
 import styles from './index.module.css';
 import { useAuth } from '../../contexts/Auth';

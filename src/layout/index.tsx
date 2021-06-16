@@ -7,7 +7,7 @@ type LayoutProps = {
   children: ReactNode
 }
 
-function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       <div className={styles.background}>{children}</div>
@@ -15,5 +15,3 @@ function Layout({ children }: LayoutProps): JSX.Element {
     </>
   );
 }
-
-export default Layout;

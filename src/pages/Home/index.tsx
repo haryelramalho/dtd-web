@@ -4,7 +4,7 @@ import {
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-import Layout from '../../layout';
+import { Layout } from '../../layout';
 
 import styles from './index.module.css';
 import { useAuth } from '../../contexts/Auth';
