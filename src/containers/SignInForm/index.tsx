@@ -36,7 +36,11 @@ function SignInForm(): JSX.Element {
         ]}
         hasFeedback
       >
-        <Input prefix={<UserOutlined />} placeholder="Email" />
+        <Input
+          data-testid="signin-email-input"
+          prefix={<UserOutlined />}
+          placeholder="Email"
+        />
       </Form.Item>
       <Form.Item
         name="password"
@@ -46,6 +50,7 @@ function SignInForm(): JSX.Element {
         hasFeedback
       >
         <Input
+          data-testid="signin-password-input"
           prefix={<LockOutlined />}
           type="password"
           placeholder="Senha"
@@ -58,6 +63,7 @@ function SignInForm(): JSX.Element {
       </Form.Item>
       <Form.Item>
         <Button
+          data-testid="signin-submit-button"
           className={styles.signin_form_button}
           type="primary"
           htmlType="submit"
